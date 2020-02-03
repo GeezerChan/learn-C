@@ -1,0 +1,3 @@
+﻿  Main.cpp
+C:\Users\wbloo\OneDrive\Desktop\C\learn-C\01_delete_duplicate_array\Project1\Functions.h(13,6): error C2062: type 'void' unexpected
+C:\Users\wbloo\OneDrive\Desktop\C\learn-C\01_delete_duplicate_array\Project1\Main.cpp(38,3): error C3861: 'deleteDuplicates': identifier not found

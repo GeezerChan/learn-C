@@ -7,11 +7,11 @@ void removeNumber(int a[], int& numOfElem, int idx);
 
 int main() {
 	cout << "Array: ";
-	int a[] = { 1, 1, 2, 2, 3 };
-	int numOfElem = 5;
-	printArray(a, 5);
+	int a[] = { 1, 2, 2, 1, 2, 2, 2 };
+	int numOfElem = 7;
+	printArray(a, numOfElem);
 
-	cout << "\nAfter deleting: " << endl;
+	cout << "\nAfter deleting: ";
 
 
 	deleteDuplicate(a, numOfElem);
@@ -28,15 +28,20 @@ void printArray(int a[], int numOfElem) {
 }
 
 void deleteDuplicate(int a[], int& numOfElem) {
-	for (int i = 0; i < numOfElem; ++i) {
-		for (int j = 0; j < i; ++j) {
+	for (int i = 0; i < numOfElem; i++) {
+		cout << "checking duplicates of " << a[i] << endl;
+		for (int j = i + 1; j < numOfElem;) {
+			cout << "scanning " << a[j] << endl;
 			if (a[i] == a[j]) {
-				cout << "\nDuplicate found. Deleting [" << a[i] << "]\n";
-				removeNumber(a, numOfElem, j);
+				cout << "duplicate found. deleting [" << a[j] << "]\n";
+				numOfElem--;
+				for (int r = j; r < numOfElem; r++) {
+					a[j] = a[j + 1];
+				}
 			}
+			else ++j;
 		}
 	}
-	cout << "Finished\nTotal remaining elements: " << numOfElem << endl;
 }
 void removeNumber(int a[], int& numOfElem, int idx) {
 	numOfElem--;

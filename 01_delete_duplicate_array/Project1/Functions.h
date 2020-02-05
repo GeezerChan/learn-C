@@ -32,10 +32,10 @@ void deleteDuplicates(int a[], int& numOfElem) {
 			cout << "looking at " << a[j] << endl;
 			if (a[i] == a[j]) {
 				cout << "duplicate found. deleting [" << a[j] << "]\n";
-				numOfElem--;
 				for (int r = j; r < numOfElem; r++) {
-					a[j] = a[j + 1];
+					a[r] = a[r + 1];
 				}
+				numOfElem--;
 			}
 			else ++j;
 		}

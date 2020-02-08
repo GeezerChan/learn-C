@@ -13,8 +13,6 @@
 #include <string>
 using namespace std;
 
-
-
 class Pokemon {
 public:
 	Pokemon();
@@ -27,12 +25,18 @@ public:
 	/**
 	 * Returns true if at least one type is the same.
 	 *
-	 * @param newPokemon string representing name of the Pokemon.
+	 * @param newPokemon object contains name, type and id.
 	 * @see getType1()
 	 * @see getType2()
+	 * @see Pokemon();
+	 * @see ~Pokemon();
 	 * @return bool
 	 */
 	bool commonType(Pokemon newPokemon) const;
+	/**
+	 *
+	 *
+	*/
 	void print() const;
 
 	~Pokemon();

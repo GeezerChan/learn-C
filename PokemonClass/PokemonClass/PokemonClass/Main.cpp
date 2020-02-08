@@ -1,4 +1,12 @@
-/* Driver */
+/*
+	Blood, William
+
+	February 7, 2020
+
+	CS A250
+	Lab 2
+*/
+
 #include "Pokemon.h"
 
 #include <string>

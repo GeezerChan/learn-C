@@ -10,7 +10,7 @@
 #include "Pokemon.h"
 #include <iostream>
 
-// Initializing variables
+// Initializing constructor variables
 Pokemon::Pokemon() {
 	pokeName = "";
 	pokeID = 0;
@@ -19,14 +19,17 @@ Pokemon::Pokemon() {
 }
 
 Pokemon::Pokemon(
-	const string& name, int id, const string& type1) {
+	const string& name, int id,
+	const string& type1) {
 	pokeName = name;
 	pokeID = id;
 	pokeType1 = type1;
 }
 
 Pokemon::Pokemon(
-	const string& name, int id, const string& type1, const string& type2) {
+	const string& name, int id, 
+	const string& type1, 
+	const string& type2) {
 	pokeName = name;
 	pokeID = id;
 	pokeType1 = type1;
@@ -39,17 +42,15 @@ string Pokemon::getType2() const { return pokeType2; }
 bool Pokemon::commonType(Pokemon newPokemon) const {
 	string newType1 = newPokemon.getType1();	
 	string newType2 = newPokemon.getType2();
-
-	bool isSingleType =					// Validates single type
+	bool isSingleType =					// Validates common single types
 		   newType1 == pokeType1
 		|| newType1 == pokeType2
 		?  true : false;	
-
-	if (newType2.empty())				// Returns result immediately when
-		return isSingleType;			// single type is found.			
-	return isSingleType					// Compares dual types
-		|| newType2 == pokeType1
-		|| newType2 == pokeType2 
+	if (newType2.empty())				// Returns result immediately
+		return isSingleType;			// when single type is found.	
+	return isSingleType					// Otherwise checks for
+		|| newType2 == pokeType1		// common dual types.
+		|| newType2 == pokeType2
 		?  true : false;
 }
 

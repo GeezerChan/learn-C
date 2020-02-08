@@ -37,22 +37,20 @@ string Pokemon::getType1() const { return pokeType1; }
 string Pokemon::getType2() const { return pokeType2; }
 
 bool Pokemon::commonType(Pokemon newPokemon) const {
-	string newType1 = newPokemon.getType1();
+	string newType1 = newPokemon.getType1();	
 	string newType2 = newPokemon.getType2();
 
-	bool isSingleType =				  // Prioritizes comparing single types
-		newType1 == pokeType1 || newType1 == pokeType2 ?
-		true : false;
-	if (newType2.empty())			  // Immediately returns result when
-		 return isSingleType;		  // single type detected
-	else {								
-		if (isSingleType)			  // Compares both single types & 
-			return true;			  // dual types
-		bool isDualType =
-			newType2 == pokeType1 || newType2 == pokeType2 ?
-			true : false;
-		return isDualType;
-	}
+	bool isSingleType =					// Validates single type
+		   newType1 == pokeType1
+		|| newType1 == pokeType2
+		?  true : false;	
+
+	if (newType2.empty())				// Returns result immediately when
+		return isSingleType;			// single type is found.			
+	return isSingleType					// Compares dual types
+		|| newType2 == pokeType1
+		|| newType2 == pokeType2 
+		?  true : false;
 }
 
 void Pokemon::print() const {

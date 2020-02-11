@@ -19,9 +19,29 @@ void NodeList::appendToHead(const string& newData) {
 		head = newNode;
 	}
 
-	delete newNode; newNode = nullptr;
 	count++;
 }
 
+void NodeList::printList() {
+	Node* traversalPtr = head;
+
+	cout << "****************** Key Chain ******************\n\n";
+
+	while (traversalPtr != nullptr) {
+		cout << "Username: [xxxxxxxxx]\n";
+		cout << "Password: ["
+			<< traversalPtr->getData() << "]\n\n";
+
+		traversalPtr = traversalPtr->getNext();
+	}
+}
+
+//void NodeList::printList() {
+//	Node* traversalPtr = head;
+//
+//	while (traversalPtr != 0) {
+//		cout << *traversalPtr << endl;
+//	}
+//}
 
 Node::~Node(){}

@@ -139,7 +139,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Node.h" />
-    <ClInclude Include="NodeList.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />

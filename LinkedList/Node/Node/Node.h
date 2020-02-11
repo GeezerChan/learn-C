@@ -36,11 +36,16 @@ public:
 	NodeList() : head(nullptr), count(0) {}
 	
 	void appendToHead(const string& newData);
-	
+	void printList();
+
 	~NodeList() {}
 private:
 	int count;
 	Node* head;
 };
+
+//ostream& operator<<(ostream& out, Node& passwords) {
+//	return out << "Password: " << passwords.getData();
+//}
 
 #endif // !NODE_H

@@ -37,6 +37,8 @@ public:
 	
 	void appendToHead(const string& newData);
 	void printList();
+	void deleteElem(const string& elem);
+	void destroyList();
 
 	~NodeList() {}
 private:

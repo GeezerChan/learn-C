@@ -18,7 +18,7 @@ void NodeList::appendToHead(const string& newData) {
 		newNode->setNext(head);
 		head = newNode;
 	}
-
+	
 	count++;
 }
 
@@ -36,6 +36,25 @@ void NodeList::printList() {
 	}
 }
 
+void NodeList::destroyList() {
+	// use a while loop
+	Node* temp = head;
+
+	while (temp != nullptr) {
+		head = head->getNext();
+		delete temp;
+		temp = head;
+	}
+
+	count = 0; // Do not count-- for each deleted node
+}
+
+void NodeList::deleteElem(const string& elem) {
+	if (elem.empty()) cerr << "List is empty" << endl;
+	else if (count == 1) { cerr << "There is 1 node in the list" << endl; }
+	else if (count == 2) { cout << "this is the 'middle'" << endl; }
+}
+
 //void NodeList::printList() {
 //	Node* traversalPtr = head;
 //
@@ -44,4 +63,7 @@ void NodeList::printList() {
 //	}
 //}
 
-Node::~Node(){}
+// Don't forget to define destructor!
+Node::~Node(){
+	// destroyList()
+}

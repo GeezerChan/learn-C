@@ -3,30 +3,72 @@
 #include <iostream>
 using namespace std;
 
+// declare non-member func processList()
+
+void processList(AnyList myList, int elem);
+
+
 int main()
 {
 	AnyList myList;
-
-	myList.insertFront(2);
-	myList.insertFront(3);
-	myList.insertFront(4);
-	myList.insertFront(5);
-	myList.insertFront(6);
-
-	cout << "Inserted: 2 3 4 5 6\n";
-	cout << "List is: ";
-	myList.print();
-	cout << endl;
 	
-	myList.destroyList(); // the list object still exists, 
-						  // but the list is empty.
+	// How to test a NodeList
 
-	cout << "\nPrint the list after emptying it...";
-	cout << "\nList is: ";
-	myList.print();
-	cout << endl;
+	// list is empty
+	{
+		AnyList myList;
+	}
+	// list has 1 node and elem is found
 
+	{
+		AnyList myList;
+		myList.insertFront(40);
+		processList(myList, 40);
+	}
+
+	// list has 1 node and elem is not found
+
+	//{
+	//	AnyList myList;
+	//	myList.insertFront(40);
+	//	cout << "\nList: ";
+	//	myList.print();
+	//	cout << "\nDeleting 100..";
+	//	myList.deleteElem(100);
+	//	cout << "\nList: ";
+	//	myList.print();
+	//}
+
+	// list has 2 node and elem is found
+
+	// list has 2 node and elem is not found
+
+	// list has several nodes and elem is found elsewhere in the middle
+
+	{
+		AnyList myList;
+		myList.insertFront(4);
+		myList.insertFront(3);
+		myList.insertFront(2);
+		myList.insertFront(1);
+		processList(myList, 3);
+	}
+
+	// list has several nodes and elem is found in last position
+
+	// list has several nodes and elem is not found
+
+	
 	cout << endl;
 	system("Pause");
 	return 0;
+}
+
+void processList(AnyList myList, int elem) {
+	cout << "\nList: ";
+	myList.print();
+	cout << "\nDeleting 40..";
+	myList.deleteElem(elem);
+	cout << "\nList: ";
+	myList.print();
 }

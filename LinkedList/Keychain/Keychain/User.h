@@ -7,8 +7,7 @@ using namespace std;
 class User {
 public:
 	User() : username(""), password(""), userID(0), next(nullptr) {}
-	User(const string& name, User* newNext) : username(name),
-												next(newNext) {}
+	User(const string& name, User* newNext) : username(name), next(newNext) {}
 	User(const string& name, const string& pass, int id)
 		: username(name), password(pass), userID(id) {}
 	

@@ -25,7 +25,7 @@ int main() {
 		UserList keychain;
 		keychain.newUser("Billy", "wb0710");
 		keychain.newUser("Sophie", "bentley@2172001");
-		keychain.newUser("Bentley", "Doggyrockwood94", 69);
+		keychain.newUser("Bentley", "Doggyrockwood94", 420);
 		keychain.display();
 	}
 

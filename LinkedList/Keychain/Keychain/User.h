@@ -42,8 +42,11 @@ public:
 	void newUser(const string& newName, const string& newPassword);
 	void newUser(const string& newName, const string& newPassword, int id);
 
+	void deleteUser(int id);
 
-	void display();
+	void destroyList();
+
+	void display() const;
 
 	// Search through a linked list to find an elem
 	// Insert new node

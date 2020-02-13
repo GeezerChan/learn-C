@@ -8,8 +8,10 @@ class User {
 public:
 	User() : username(""), password(""), userID(0), next(nullptr) {}
 	User(const string& name, User* newNext) : username(name), next(newNext) {}
-	User(const string& name, const string& pass, int id)
-		: username(name), password(pass), userID(id) {}
+	User(const string& name, User* newNext, const string& pass) 
+		: username(name), next(newNext), password(pass) {}
+	User(const string& name, User* newNext, const string& pass, int id)
+		: username(name), next(newNext), password(pass), userID(id) {}
 	
 	string getUsername() const { return username; }
 	string getPassword() const { return password; }
@@ -37,6 +39,10 @@ public:
 
 	// Create a linked list
 	void newUser(const string& newName);
+	void newUser(const string& newName, const string& newPassword);
+	void newUser(const string& newName, const string& newPassword, int id);
+
+
 	void display();
 
 	// Search through a linked list to find an elem

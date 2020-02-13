@@ -20,18 +20,19 @@ void UserList::deleteUser(int id) {
 	if (count == 0) cerr << "There are no users to delete.\n";
 	else if (count == 1) {
 		if (id == head->getUserID()) {
-			cout << "Are you sure you wish to delete? (y/n)\n";
+			cout << "Are you sure you wish to delete ["
+				<< head->getUsername() << "]? (y/n)\n";
 			string confirm;
 			cin >> confirm;
 			if (confirm == "y") {
 				delete head;			// delete it
 				head = nullptr;
 				--count;
+				cout << "Deleted.\n";
 			}
 			else {
 				cout << "\nExiting.\n";
 			}
-
 		}
 		else {
 			cerr << "Could not find [" << id << "]\n";
@@ -39,13 +40,15 @@ void UserList::deleteUser(int id) {
 	}
 	else {						// make a traversal pointer find&delete
 		if (id == head->getUserID()) {
-			cout << "Are you sure you wish to delete? (y/n)\n";
+			cout << "Are you sure you wish to delete ["
+				<< head->getUsername()<< "]? (y/n)\n";
 			string confirm;
 			cin >> confirm;
 			if (confirm == "y") {
 				delete head;			// delete it
 				head = nullptr;
 				--count;
+				cout << "Deleted.\n";
 			}
 			else {
 				cout << "\nExiting.\n";

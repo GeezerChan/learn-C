@@ -33,13 +33,22 @@ void DoublyList::createAList()
 	// Use the overloaded constructor.
 	// Do NOT create a pointer.
 	// Your code here...
-
-
+	
 
 	// Update count;
 	// Your code here...
+	first = new Node(						// create body
+		2,									// data
+		first,								// 
+		last								// 
+	);
 
+	++count;
 	
+	if (count == 1) last = first;			// link tail with head to complete body
+	else {
+		first->getNext()->setPrev(first);	// or link body with tail
+	}
 
 	cout << "SECTION 1 - TEST ALL" << endl;
 	testAll();
@@ -59,7 +68,6 @@ void DoublyList::createAList()
 
 	// Update count;
 	// Your code here...
-
 
 
 	cout << "\nSECTION 2 - TEST ALL" << endl;
@@ -82,7 +90,6 @@ void DoublyList::createAList()
 	// Your code here...
 
 
-
 	cout << "\nSECTION 3 - TEST ALL" << endl;
 	testAll();
 
@@ -93,7 +100,7 @@ void DoublyList::createAList()
 	// Delete the first node.
 	// List becomes: 4 2
 	// Your code here...
-
+	
 
 
 	// Update count.

@@ -17,8 +17,8 @@ int main() {
 
 	{
 		UserList keychain;
-		keychain.newUser("Billy");
-		keychain.newUser("Sofie");
+		keychain.newUser("John");
+		keychain.newUser("Jill");
 		keychain.display();
 	}
 
@@ -34,6 +34,12 @@ int main() {
 		UserList keychain;
 		keychain.newUser("Admin", "password", 666);
 		keychain.deleteUser(666);
+		keychain.display();
+	}
+
+	{
+		UserList keychain;
+		keychain.newUser("JohnnyAppleseed", "apples123", 123);
 		keychain.display();
 	}
 

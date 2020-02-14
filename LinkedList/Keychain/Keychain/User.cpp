@@ -72,7 +72,8 @@ void UserList::deleteUser(int id) {
 					else {
 						cout << "\nExiting.\n";
 					}
-				}else {
+				}
+				else {
 					selector = traversal;
 					traversal = traversal->getNext();
 				}
@@ -97,9 +98,27 @@ void UserList::display() const {
 	}
 }
 
+void UserList::destroyList() {
+	if (count == 0) cerr << "List is empty." << endl;
+	else if (count == 1) {
+		delete head;
+		head = nullptr;
+		--count;
+	}
+	else {
+		User* traversalPtr = head;
+		while (traversalPtr != nullptr) {
+			delete head;
+			head = nullptr;
+		}
+		cout << "Users deleted.\n" << endl;
+	}
+}
+
 UserList::~UserList()
 {
-	// destroyList()
+	cout << "Deleting all users...\n";
+	//destroyList();
 }
 
 User::~User(){}

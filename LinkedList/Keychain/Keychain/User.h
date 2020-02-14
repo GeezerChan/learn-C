@@ -6,7 +6,7 @@ using namespace std;
 
 class User {
 public:
-	User() : username(""), password(""), userID(0), next(nullptr) {}
+	User() : username(""), password(""), userID(0), next(nullptr), prev(nullptr) {}
 	User(const string& name, User* newNext) : username(name), next(newNext) {}
 	User(const string& name, User* newNext, const string& pass) 
 		: username(name), next(newNext), password(pass) {}
@@ -30,12 +30,13 @@ private:
 	string password;
 	int userID;
 	User* next;
+	User* prev;
 };
 
 class UserList
 {
 public:
-	UserList() : head(nullptr), count(0) {}
+	UserList() : head(nullptr), tail(nullptr), count(0) {}
 
 	// Create a linked list
 	void newUser(const string& newName);
@@ -56,6 +57,7 @@ public:
 
 private:
 	User* head;
+	User* tail;
 	int count;
 };
 

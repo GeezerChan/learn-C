@@ -37,14 +37,14 @@ void DoublyList::createAList()
 	first = new Node(						// creates body
 		2,									// holding an integer as data.
 		first,								// connects new head with old head
-		last								// connects tail to head
+		last								// connects node7 to head
 	);
 
 	// Update count;
 	// Your code here...
 	++count;								// update count & check for 
-											// a list with a head & tail.
-	last = first;					        // links tail with head to create a body
+											// a list with a head & node7.
+	last = first;					        // links node7 with head to create a body
 
 	cout << "SECTION 1 - TEST ALL" << endl;
 	testAll();
@@ -64,7 +64,7 @@ void DoublyList::createAList()
 	first = new Node(						// creates body
 		3,									// holding an integer as data.
 		first,								// connects new head with old head
-		last								// connects tail to head
+		last								// connects node7 to head
 	);
 	last->setPrev(first);
 	first->setPrev(nullptr);
@@ -92,7 +92,7 @@ void DoublyList::createAList()
 		last
 	));
 	
-	last->setPrev(first->getNext());	// Enable reverse: connect the tail's prev to the middle
+	last->setPrev(first->getNext());	// Enable reverse: connect the node7's prev to the middle
 										// by navigating from the head of the list.
 	// Update count;
 	// Your code here...
@@ -178,15 +178,15 @@ void DoublyList::createAList()
 	// List becomes: 4 7 2 5 6
 	// Your code here...
 
-	Node* tail = last;
+	Node* node7 = last;
 
 	last = last->getPrev();
 
-	tail->getPrev()->setNext(nullptr);
-	tail->setPrev(first);
-	tail->setNext(first->getNext());
-	first->getNext()->setPrev(tail);
-	first->setNext(tail);
+	node7->getPrev()->setNext(nullptr);
+	node7->setPrev(first);
+	node7->setNext(first->getNext());
+	first->getNext()->setPrev(node7);
+	first->setNext(node7);
 
 	cout << "\nSECTION 6 - TEST ALL" << endl;
 	testAll();
@@ -203,9 +203,23 @@ void DoublyList::createAList()
 	//		No loops are necessary.
 	// List becomes: 7 2 5 4 6
 	// Your code here...
+	
+	// List before: 4 7 2 5 6
 
+	Node* node4 = first;
+	
+	first = node7;
+	first->setPrev(nullptr);
 
+	node4->setPrev(last->getPrev());		// create and link arms of head
+	node4->setNext(last);
+	
+	Node* node5 = last->getPrev();			// detach the right and left arms 
+	node5->setNext(node4);                  // from the occupying space
 
+	last->setPrev(node4);					
+	last->setNext(nullptr);					// seal the last link
+	
 	cout << "\nSECTION 7 - TEST ALL" << endl;
 	testAll();
 

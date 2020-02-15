@@ -213,9 +213,8 @@ void DoublyList::createAList()
 
 	node4->setPrev(last->getPrev());		// create and link arms of head
 	node4->setNext(last);
-	
-	Node* node5 = last->getPrev();			// detach the right and left arms 
-	node5->setNext(node4);                  // from the occupying space
+											// detach the right and left arms 
+	last->getPrev()->setNext(node4);		// from the occupying space
 
 	last->setPrev(node4);					
 	last->setNext(nullptr);					// seal the last link

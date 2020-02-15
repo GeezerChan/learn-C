@@ -33,22 +33,18 @@ void DoublyList::createAList()
 	// Use the overloaded constructor.
 	// Do NOT create a pointer.
 	// Your code here...
-	
+
+	first = new Node(						// creates body
+		2,									// holding an integer as data.
+		first,								// connects new head with old head
+		last								// connects tail to head
+	);
 
 	// Update count;
 	// Your code here...
-	first = new Node(						// create body
-		2,									// data
-		first,								// 
-		last								// 
-	);
-
-	++count;
-	
-	if (count == 1) last = first;			// link tail with head to complete body
-	else {
-		first->getNext()->setPrev(first);	// or link body with tail
-	}
+	++count;								// update count & check for 
+											// a list with a head & tail.
+	last = first;					        // links tail with head to create a body
 
 	cout << "SECTION 1 - TEST ALL" << endl;
 	testAll();
@@ -64,11 +60,17 @@ void DoublyList::createAList()
 	// Do NOT create a pointer.
 	// Your code here...
 
-
-
+	last = first;
+	first = new Node(						// creates body
+		3,									// holding an integer as data.
+		first,								// connects new head with old head
+		last								// connects tail to head
+	);
+	last->setPrev(first);
+	first->setPrev(nullptr);
 	// Update count;
 	// Your code here...
-
+	++count;								
 
 	cout << "\nSECTION 2 - TEST ALL" << endl;
 	testAll();
@@ -84,11 +86,17 @@ void DoublyList::createAList()
 	// NO MORE than 3 statements.
 	// Your code here...
 
-
-
+	first->setNext(new Node(
+		4,
+		first,
+		last
+	));
+	
+	last->setPrev(first->getNext());	// Enable reverse: connect the tail's prev to the middle
+										// by navigating from the head of the list.
 	// Update count;
 	// Your code here...
-
+	++count;
 
 	cout << "\nSECTION 3 - TEST ALL" << endl;
 	testAll();
@@ -100,12 +108,13 @@ void DoublyList::createAList()
 	// Delete the first node.
 	// List becomes: 4 2
 	// Your code here...
-	
 
-
+	first = first->getNext();			// Replace head with next node.
+	first->setPrev(nullptr);			// Unlink & deactivate the next node's previous pointer
+										// that is still attached to the deleted node.
 	// Update count.
 	// Your code here...
-
+	--count;
 
 
 	cout << "\nSECTION 4 - TEST ALL" << endl;
@@ -121,12 +130,14 @@ void DoublyList::createAList()
 	// Do NOT use the pointer you created.
 	// Your code here...
 
-
+	last = new Node(5, last, nullptr);
+	last = new Node(6, last, nullptr);
+	last = new Node(7, last, nullptr);
 
 	// Update count.
 	// One statement only.
 	// Your code here...
-
+	count += 3;
 
 
 	cout << "\nSECTION 5 - TEST ALL" << endl;

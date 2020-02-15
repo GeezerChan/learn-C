@@ -178,7 +178,15 @@ void DoublyList::createAList()
 	// List becomes: 4 7 2 5 6
 	// Your code here...
 
-
+	Node* node2 = first->getNext();
+	Node* node7 = last;
+	Node* node6 = last->getPrev();
+	node7->getPrev()->setNext(nullptr);
+	node7->setPrev(first);
+	node7->setNext(node2);
+	last = node6;
+	node2->setPrev(node7);
+	first->setNext(node7);
 
 	cout << "\nSECTION 6 - TEST ALL" << endl;
 	testAll();

@@ -128,11 +128,16 @@ void DoublyList::createAList()
 	// 5 6 7 in this order.
 	// List becomes: 4 2 5 6 7
 	// Do NOT use the pointer you created.
-	// Your code here...
+	// Your code here..
+	// Why not just link a new list to last???
 
-	last = new Node(5, last, nullptr);
-	last = new Node(6, last, nullptr);
-	last = new Node(7, last, nullptr);
+	for (int data = 5; data < 8; data++) {
+		last = new Node(
+			data,
+			last,
+			nullptr
+		);
+	}
 
 	// Update count.
 	// One statement only.

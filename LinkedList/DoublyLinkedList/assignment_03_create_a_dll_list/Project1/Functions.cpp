@@ -210,7 +210,7 @@ void DoublyList::createAList()
 	
 	first->setPrev(last->getPrev());		// create and link arms of head
 	first->setNext(last);
-	// detach the right and left arms 
+											// detach the right and left arms 
 	last->getPrev()->setNext(first);		// from the occupying space
 
 	last->setPrev(first);
@@ -219,8 +219,6 @@ void DoublyList::createAList()
 	first = temp;
 
 	first->setPrev(nullptr);
-
-					// seal the last link
 	
 	cout << "\nSECTION 7 - TEST ALL" << endl;
 	testAll();
@@ -237,31 +235,37 @@ void DoublyList::createAList()
 	// Your code here...
 
 	// List before: 7 2 5 4 6
-	temp = first;
+	temp = first;												// recycled pointer
+
+	auto max = temp->getData();									// initialized comparison val
 	
-	while (temp->getNext() != nullptr) {
-		if (temp->getData() > temp->getNext()->getData()) {	// workhorse 7 2
-			auto max = temp->getData();
-			temp->setData(temp->getNext()->getData());		// swap temp and next values.
-			temp->getNext()->setData(max);
+	while (temp->getNext() != nullptr) {						// iterates through the entire list from the head
+		if (temp->getData() > temp->getNext()->getData()) {		// compares current data with next data
+			max = temp->getData();
+
+			temp->setData(temp->getNext()->getData());			// swap current data val first 
+			temp->getNext()->setData(max);						// then the next.
+
+			temp = first;										// ** GOES BACK TO THE HEAD OF THE LIST UNTIL 
+		}														
+		else {													// ALL VALUES ARE IN ORDER BEFORE MOVING TO NEXT. **
+			temp = temp->getNext();								
 		}
-		
-		temp = temp->getNext();						// nav to the next page.
 	}
 
-	temp = first;										
+	//temp = first;										
 
-	while (temp->getNext() != nullptr) {						
-		if (temp->getData() > temp->getNext()->getData()) {	 
-			auto max = temp->getData();					
-			temp->setData(temp->getNext()->getData());		// swap temp and next values
-			temp->getPrev()->setData(temp->getPrev()->getData());
+	//while (temp->getNext() != nullptr) {						
+	//	if (temp->getData() > temp->getNext()->getData()) {	 
+	//		auto max = temp->getData();					
+	//		temp->setData(temp->getNext()->getData());		// swap temp and next values
+	//		temp->getPrev()->setData(temp->getPrev()->getData());
 
-			temp->getNext()->setData(max);
-		}
+	//		temp->getNext()->setData(max);
+	//	}
 
-		temp = temp->getNext();						// nav to the next page
-	}
+	//	temp = temp->getNext();						// nav to the next page
+	//}
 
 	cout << "\nSECTION 8 - TEST ALL" << endl;
 	testAll();

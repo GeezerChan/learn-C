@@ -233,7 +233,35 @@ void DoublyList::createAList()
 	// List becomes: 2 4 5 6 7
 	// Your code here...
 
+	// List before: 7 2 5 4 6
+	Node* current = first;
 
+	Node* traversalPtr = current->getNext();
+	
+	while (traversalPtr != nullptr) {
+		if (current->getData() > traversalPtr->getData()) {	// workhorse 7 2
+			auto max = current->getData();
+			current->setData(traversalPtr->getData());		// swap current and next values.
+			traversalPtr->setData(max);
+		}
+		
+		current = current->getNext();						// nav to the next page.
+		traversalPtr = traversalPtr->getNext();
+	}
+
+	current = first;										// same code is run again
+	traversalPtr = current->getNext();						// to ensure completion & accuracy.
+
+	while (traversalPtr != nullptr) {						
+		if (current->getData() > traversalPtr->getData()) {	 
+			auto max = current->getData();					
+			current->setData(traversalPtr->getData());		// swap current and next values
+			traversalPtr->setData(max);
+		}
+
+		current = current->getNext();						// nav to the next page
+		traversalPtr = traversalPtr->getNext();
+	}
 
 	cout << "\nSECTION 8 - TEST ALL" << endl;
 	testAll();
@@ -246,12 +274,27 @@ void DoublyList::createAList()
 	// List becomes: 1 2 3 4 5 6 7
 	// Your code here...
 
+	// insert 3 first
+	Node* node3 = new Node(				// create node & activate links
+		3,
+		first,
+		first->getNext()
+	);
 
+	first->getNext()->setPrev(node3);	// chain links in between head and next node
+	first->setNext(node3);
+	
+	first = new Node(					
+		1,
+		nullptr,
+		first
+	);
+
+	first->getNext()->setPrev(first);	// assign new node to head
 
 	// Add 2 to count.
 	// Your code here...
-
-
+	count += 2;
 
 	cout << "\nSECTION 9 - TEST ALL" << endl;
 	testAll();

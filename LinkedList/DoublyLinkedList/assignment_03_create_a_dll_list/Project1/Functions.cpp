@@ -37,14 +37,14 @@ void DoublyList::createAList()
 	first = new Node(						// creates body
 		2,									// holding an integer as data.
 		first,								// connects new head with old head
-		last								// connects node7 to head
+		last								// connects temp to head
 	);
 
 	// Update count;
 	// Your code here...
 	++count;								// update count & check for 
-											// a list with a head & node7.
-	last = first;					        // links node7 with head to create a body
+											// a list with a head & temp.
+	last = first;					        // links temp with head to create a body
 
 	cout << "SECTION 1 - TEST ALL" << endl;
 	testAll();
@@ -64,7 +64,7 @@ void DoublyList::createAList()
 	first = new Node(						// creates body
 		3,									// holding an integer as data.
 		first,								// connects new head with old head
-		last								// connects node7 to head
+		last								// connects temp to head
 	);
 	last->setPrev(first);
 	first->setPrev(nullptr);
@@ -92,7 +92,7 @@ void DoublyList::createAList()
 		last
 	));
 	
-	last->setPrev(first->getNext());	// Enable reverse: connect the node7's prev to the middle
+	last->setPrev(first->getNext());	// Enable reverse: connect the temp's prev to the middle
 										// by navigating from the head of the list.
 	// Update count;
 	// Your code here...
@@ -178,15 +178,16 @@ void DoublyList::createAList()
 	// List becomes: 4 7 2 5 6
 	// Your code here...
 
-	Node* node7 = last;
+	Node* temp = last;					/* declaration of re-usable pointer */
 
 	last = last->getPrev();
 
-	node7->getPrev()->setNext(nullptr);
-	node7->setPrev(first);
-	node7->setNext(first->getNext());
-	first->getNext()->setPrev(node7);
-	first->setNext(node7);
+	temp->getPrev()->setNext(nullptr);
+	temp->setPrev(first);
+	temp->setNext(first->getNext());
+
+	first->getNext()->setPrev(temp);
+	first->setNext(temp);						// temp remains 7
 
 	cout << "\nSECTION 6 - TEST ALL" << endl;
 	testAll();
@@ -206,18 +207,20 @@ void DoublyList::createAList()
 	
 	// List before: 4 7 2 5 6
 
-	Node* node4 = first;
 	
-	first = node7;
+	first->setPrev(last->getPrev());		// create and link arms of head
+	first->setNext(last);
+	// detach the right and left arms 
+	last->getPrev()->setNext(first);		// from the occupying space
+
+	last->setPrev(first);
+	last->setNext(nullptr);
+
+	first = temp;
+
 	first->setPrev(nullptr);
 
-	node4->setPrev(last->getPrev());		// create and link arms of head
-	node4->setNext(last);
-											// detach the right and left arms 
-	last->getPrev()->setNext(node4);		// from the occupying space
-
-	last->setPrev(node4);					
-	last->setNext(nullptr);					// seal the last link
+					// seal the last link
 	
 	cout << "\nSECTION 7 - TEST ALL" << endl;
 	testAll();
@@ -234,33 +237,30 @@ void DoublyList::createAList()
 	// Your code here...
 
 	// List before: 7 2 5 4 6
-	Node* current = first;
-
-	Node* traversalPtr = current->getNext();
+	temp = first;
 	
-	while (traversalPtr != nullptr) {
-		if (current->getData() > traversalPtr->getData()) {	// workhorse 7 2
-			auto max = current->getData();
-			current->setData(traversalPtr->getData());		// swap current and next values.
-			traversalPtr->setData(max);
+	while (temp->getNext() != nullptr) {
+		if (temp->getData() > temp->getNext()->getData()) {	// workhorse 7 2
+			auto max = temp->getData();
+			temp->setData(temp->getNext()->getData());		// swap temp and next values.
+			temp->getNext()->setData(max);
 		}
 		
-		current = current->getNext();						// nav to the next page.
-		traversalPtr = traversalPtr->getNext();
+		temp = temp->getNext();						// nav to the next page.
 	}
 
-	current = first;										// same code is run again
-	traversalPtr = current->getNext();						// to ensure completion & accuracy.
+	temp = first;										
 
-	while (traversalPtr != nullptr) {						
-		if (current->getData() > traversalPtr->getData()) {	 
-			auto max = current->getData();					
-			current->setData(traversalPtr->getData());		// swap current and next values
-			traversalPtr->setData(max);
+	while (temp->getNext() != nullptr) {						
+		if (temp->getData() > temp->getNext()->getData()) {	 
+			auto max = temp->getData();					
+			temp->setData(temp->getNext()->getData());		// swap temp and next values
+			temp->getPrev()->setData(temp->getPrev()->getData());
+
+			temp->getNext()->setData(max);
 		}
 
-		current = current->getNext();						// nav to the next page
-		traversalPtr = traversalPtr->getNext();
+		temp = temp->getNext();						// nav to the next page
 	}
 
 	cout << "\nSECTION 8 - TEST ALL" << endl;

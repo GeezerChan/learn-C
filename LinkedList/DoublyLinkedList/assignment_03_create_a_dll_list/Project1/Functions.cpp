@@ -39,13 +39,13 @@ void DoublyList::createAList()
 	// Do NOT create a pointer.
 	// Your code here...
 
-	first = new Node(						// new node becomes the new head
+	first = new Node(		// new node becomes the new head.
 		2,									
-		first,								// primes new links with old links.
+		first,				// primes new links with old links.
 		last								
 	);
 
-	last = first;					        // old head becomes new head.
+	last = first;			// old head becomes new head.
 
 	// Update count;
 	// Your code here...
@@ -67,13 +67,13 @@ void DoublyList::createAList()
 
 	last = first;
 
-	first = new Node(						// replaces head with a new
-		3,									// head, inheriting all of the 
-		nullptr,							// existing old links.
-		last								
+	first = new Node(		// replaces head with a new head.
+		3,					// inherits last position.
+		nullptr,
+		last
 	);
 	
-	last->setPrev(first);					// connects tail with new head.
+	last->setPrev(first);	// connects tail with new head.
 
 	// Update count;
 	// Your code here...
@@ -93,16 +93,17 @@ void DoublyList::createAList()
 	// NO MORE than 3 statements.
 	// Your code here...
 
-	first->setNext(						// creates new node already linked 
-		new Node(						// to the head.
+	first->setNext(		// creates new node already linked to head.
+		new Node(				
 			4,
 			first,
 			last
 		)
 	);
 	
-	last->setPrev(first->getNext());	// inserts new node to the middle by
-										// traversing from the head.
+	// inserts new node to the middle by traversing from the head.
+	last->setPrev(first->getNext());	
+
 	// Update count;
 	// Your code here...
 	++count;
@@ -118,9 +119,11 @@ void DoublyList::createAList()
 	// List becomes: 4 2
 	// Your code here...
 
-	first = first->getNext();			// Replace head with next node.
-	first->setPrev(nullptr);			// Deactivates the new head's previous pointer 
-										// that is still attached to the deleted node.
+	first = first->getNext();	// Replace head with next node.
+
+	// Deactivates new head's prev still attached to the deleted node
+	first->setPrev(nullptr);	
+	
 	// Update count.
 	// Your code here...
 	--count;
@@ -138,17 +141,18 @@ void DoublyList::createAList()
 	// List becomes: 4 2 5 6 7
 	// Do NOT use the pointer you created.
 	// Your code here..
-	
+
+	// Creates 3 new nodes primed & already linked to the tail.
 	for (int newData = 5; newData < 8; ++newData) {
-		last->setNext(					// creates new node already linked to the tail.
+		last->setNext(					
 			new Node(					
-				newData,				// data = newData;
-				last,					// prev = last;
-				nullptr					// next = nullptr;
+				newData,			// data = newData;
+				last,				// prev = last;
+				nullptr				// next = nullptr;
 			)
 		);
 
-		last = last->getNext();			// new node becomes the new tail.
+		last = last->getNext();		// new node becomes the new tail.
 	}
 
 	// Update count.
@@ -175,7 +179,7 @@ void DoublyList::createAList()
 	// List becomes: 4 7 2 5 6
 	// Your code here...
 
-	Node* temp = last;						/* declaration of re-usable pointer */
+	Node* temp = last;			/* declaration of re-usable pointer */
 
 	last = last->getPrev();
 
@@ -184,7 +188,7 @@ void DoublyList::createAList()
 	temp->setNext(first->getNext());
 
 	first->getNext()->setPrev(temp);
-	first->setNext(temp);					// temp remains 7
+	first->setNext(temp);				// temp remains 7
 
 	cout << "\nSECTION 6 - TEST ALL" << endl;
 	testAll();
@@ -201,18 +205,19 @@ void DoublyList::createAList()
 	//		No loops are necessary.
 	// List becomes: 7 2 5 4 6
 	// Your code here...
-											// List before: 4 7 2 5 6
-	first->setPrev(last->getPrev());		// create and link arms of head.
+	
+	// Creates and links arms (prev & next) of head.
+	first->setPrev(last->getPrev());	
 	first->setNext(last);
 
-	last->getPrev()->setNext(first);		// detach the right and left arms 
-											// from the occupying space.
-	last->setPrev(first);					// connects the links in the space to old head.
-	last->setNext(nullptr);					// seals the new end of the new tail.
+	// Reattaches arms from target node with old head.	
+	last->getPrev()->setNext(first); 
+	last->setPrev(first);		// chains target node links to old head.
+	last->setNext(nullptr);		// seals the new end of the new tail.
 
-	first = temp;
+	first = temp;				// insertion.
 
-	first->setPrev(nullptr);
+	first->setPrev(nullptr);	// seals the entrance to the head.
 	
 	cout << "\nSECTION 7 - TEST ALL" << endl;
 	testAll();
@@ -229,20 +234,22 @@ void DoublyList::createAList()
 	// Your code here...
 
 	// List before: 7 2 5 4 6
-	temp = first;												// recycled pointer.
+	temp = first;						// recycled pointer.
 
-	auto max = temp->getData();									// initialized comparison val.
-	
-	while (temp->getNext() != nullptr) {						// iterates through the entire list from the head.
-		if (temp->getData() > temp->getNext()->getData()) {		// compares current data with next data.
-			max = temp->getData();
+	auto max = temp->getData();			// initialized comparison val.
 
-			temp->setData(temp->getNext()->getData());			// swap current data val first 
-			temp->getNext()->setData(max);						// then the next.
+	// Iterates through the list from the head, pushing max to the end.
+	while (temp->getNext() != nullptr) {						
+		if (temp->getData() > temp->getNext()->getData()) {		
+			max = temp->getData();		// holds the current data.
+			
+			// Swaps current data first, then the next node's data.
+			temp->setData(temp->getNext()->getData());
+			temp->getNext()->setData(max);
 
-			temp = first;										// ** GOES BACK TO THE HEAD OF THE LIST UNTIL 
+			temp = first;	// GOES BACK TO THE HEAD OF THE LIST UNTIL
 		}														
-		else {													// ALL VALUES ARE IN ORDER BEFORE MOVING TO NEXT. **
+		else {			// ALL VALUES ARE IN ORDER BEFORE MOVING ON.
 			temp = temp->getNext();								
 		}
 	}
@@ -259,14 +266,17 @@ void DoublyList::createAList()
 	// Your code here...
 
 	// inserts 3 first
-	temp = new Node(					// recycled pointer morphs into
-		3,								// new node with links primed.
+
+	// recycled pointer morphs into new node with links primed.
+	temp = new Node(
+		3,
 		first,
 		first->getNext()
 	);
 
-	first->getNext()->setPrev(temp);	// connects the new node in between
-	first->setNext(temp);				// head & next node.
+	// connects the new node in between head & next node.
+	first->getNext()->setPrev(temp);	
+	first->setNext(temp);
 	
 	first = new Node(					
 		1,
@@ -274,7 +284,8 @@ void DoublyList::createAList()
 		first
 	);
 
-	first->getNext()->setPrev(first);	// assigns new node to head.
+	// connects final node to head.
+	first->getNext()->setPrev(first);
 
 	// Add 2 to count.
 	// Your code here...

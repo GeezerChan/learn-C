@@ -1,17 +1,6 @@
-/*
-	Blood, William
 
+#include <string>
 
-*/
-
-#include <iostream>
-
-using namespace std;
-
-int main() {
-
-	cout << "Hello" << endl;
-
-	system("Pause");
-	return 0;
+void f() {
+	std::string(foo);
 }

@@ -13,21 +13,14 @@
 #include <iostream>
 
 class Vector2D {
+	friend std::ostream& operator<<(std::ostream& out, const Vector2D& point);
+
 public:
 	Vector2D() : x(0), y(0) {}
 	Vector2D(int newX, int newY) : x(newX), y(newY) {}
 
-	friend int operator*(					// provide read access only to overloaded operators
-		const Vector2D& lhs, const Vector2D& rhs
-	);
-
-	friend bool operator==(
-		const Vector2D& lhs, const Vector2D& rhs
-	);
-
-	friend std::ostream& operator<<(
-		std::ostream& out, const Vector2D& point
-	);
+	int operator*(const Vector2D& rhs);
+	bool operator==(const Vector2D& rhs);
 
 	~Vector2D();
 private:
@@ -39,12 +32,12 @@ std::ostream& operator<< (std::ostream& out, const Vector2D& point) {
 	return out;
 }
 
-int operator*(const Vector2D& lhs, const Vector2D& rhs) {
-	return (lhs.x * rhs.x) + (lhs.y * rhs.y);		// returns the dot product of 2 vectors
+int Vector2D::operator*(const Vector2D& rhs) {
+	return (x* rhs.x) + (y * rhs.y);		// returns the dot product of 2 vectors
 }
 
-bool operator==(const Vector2D& lhs, const Vector2D& rhs) {
-	return (lhs.x == lhs.y && rhs.x == rhs.y);
+bool Vector2D::operator==(const Vector2D& rhs) {
+	return (x == y && rhs.x == rhs.y);
 }
 
 Vector2D::~Vector2D(){}

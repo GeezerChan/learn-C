@@ -1,4 +1,3 @@
-
 /*
 	Blood, William
 
@@ -19,7 +18,7 @@ using namespace std;
 // The function passes a vector and prints all
 // the elements on one line, separated by a space.
 // Use an iterator and a FOR loop.
-
+void printVector(const vector<int>& v);
 
 // Declaration function printList.
 // The function passes a list and prints all
@@ -42,101 +41,107 @@ int main()
 	// Use function push_back to insert the following values in v1: 12, 73, 41,
 	// 38, 25, 56, an 63 in this order.
 	v1.push_back(12);
-	v1.push_back(73); //...
+	v1.push_back(73);
+	v1.push_back(41);
+	v1.push_back(38);
+	v1.push_back(25);
+	v1.push_back(56);
+	v1.push_back(63);
 
 	// size_type size() const noexcept;
 	// Create a variable of type int named sizeV1 and store the size of the vector.
 	// Use function size to retrieve the size of the vector. 
 	// Make sure you cast the return value of the function size to the appropriate type.
-
+	size_t sizeV1 = v1.size();
 
 	// Use a FOR loop to print out the vector.
 	// Do NOT use an iterator.
-
+	for (const auto &elem : v1)
+		cout << elem << " ";
 
 	//void clear() noexcept;
 	// Call the function clear on vector v1.
-
+	v1.clear();
 
 	// size_type size() const noexcept;
 	// Call function size to print the size of v1.
-
+	cout << v1.size() << endl;
 
 	// size_type capacity() const noexcept;
 	// Call function capacity to output the capacity of v1.
-
+	cout << v1.capacity() << endl;
 
 	// Create an array of integers containing: 10,11,12,13,14,15,16,17,18,19
-
+	const int a[] = { 10,11,12,13,14,15,16,17,18,19 };
 
 	// Use the default constructor to declare an integer vector v2.
-
+	vector<int> v2;
 
 	// void assign (InputIterator first, InputIterator last);
 	// Use function assign to copy elements 12, 13, 14, 15, and 16 from the
 	// array into v2.
 	// One statement only.
-
+	v2.assign(a, a + 6);
 
 	// Call the function printVector to print v2.
-
+	printVector(v2);
 
 	// const_reference back() const;
 	// Use the function back output the last element in the vector
 	// (Notice that the back function returns a reference.)
-
+	cout << v2.back() << endl;
 		
 	// Use the default constructor to declare an integer vector v3.
-
+	vector<int> v3;
 
 	// void assign (size_type n, const value_type& val);
 	// Use function assign to insert the values 7, 7, 7, 7, and 7.
 	// One statement only.
-
+	v3.assign(5, 7);
 
 	// Call the function printVector  to print v3.
-
+	printVector(v3);
 
 	// const_reference at(size_type n) const;
 	// Use function at to replace the middle element with 100.
 	// (Notice that the at function returns a reference.)
-
+	v3.at(v3.size() / 2) = 100;
 
 	// Call the function printVector to print v3.
-
+	printVector(v3);
 
 	// vector (const vector& x);
 	// Use the copy constructor to create a new vector v4 with the 
 	// same elements of v3.
-
+	vector<int> v4(v3);
 
 	// Call the function printVector to print v4.
-
+	printVector(v4);
 
 	// Create an iterator iterVector4 to point to the first element of v4.
-
+	vector<int>::const_iterator iterVector4 = v4.begin();
 
 	// Create an iterator iterVector2 to point to the second element of v2.
-
+	vector<int>::const_iterator iterVector2 = v2.cbegin() + 1;
 
 	// iterator insert (const_iterator position, InputIterator first, InputIterator last);
 	// Use function insert to insert the second, third, and fourth element
 	// of v2 as the first, second, and third element of v4.
 	// (Notice that the insert function returns an iterator, 
 	//   but if we do not intend to use it, we can ignore it.)
-
+	v4.insert(iterVector4, iterVector2, iterVector2 + 4);
 
 	// Call the function printVector to print v4.
-
+	printVector(v4);
 
 	// iterator insert (const_iterator position, size_type n, const value_type& val);
 	// Use the function insert to insert three 0s at the end of v4.
 	// (Notice that the insert function returns an iterator, 
 	//   but if we do not intend to use it, we can ignore it.)
-
+	v4.insert(v4.end(), { 0, 0, 0 });
 
 	// Call the function printVector to print v4.
-
+	printVector(v4);
 
 	// bool empty() const noexcept;
 	// const_reference back() const;
@@ -146,30 +151,36 @@ int main()
 	// the last element, and function pop_back to remove elements.
 	// (Notice that the insert function returns an iterator, 
 	//   but if we do not intend to use it, we can ignore it.)
-
+	cout << "Removing: ";
+	while (!v2.empty())
+	{
+		cout << v2.back() << " ";
+		v2.pop_back();
+	}
+	cout << endl;
 
 	// void resize (size_type n, const value_type& val);
 	// Use function resize to insert three times number
 	// 4 into v2.
-
+	v2.resize(3, 4);
 
 	// Call the function printVector to print v2.
-
+	printVector(v2);
 
 	// const_reference front() const;
 	// Use function front to output the first element in v4.
 	// (Notice that the front function returns a reference.)
-
+	cout << v4.front() << endl;
 
 	// void swap (vector& x);
 	// Use function swap to swap v2 with v4.
-
+	v2.swap(v4);
 
 	// Call the function printVector to print v2.
-
+	printVector(v2);
 
 	// Create a new vector v5;
-
+	vector<int> v5;
 
 	// Use the overloaded assignment operator to copy all the elements of v2
 	// into v5.
@@ -328,3 +339,17 @@ int main()
 
 // Definition function printList
 
+void printVector(const vector<int>& v)
+{
+	if (v.empty())
+	{
+		cerr << "Vector is empty." << endl;
+		return;
+	}
+	vector<int>::const_iterator iter = v.cbegin();
+	vector<int>::const_iterator iterEnd = v.cend();
+
+	for (iter; iter != iterEnd; ++iter)
+		cout << *iter << " ";
+	cout << endl;
+}

@@ -24,6 +24,8 @@ void printVector(const vector<int>& v);
 // The function passes a list and prints all
 // the elements on one line, separated by a space.
 // Use an iterator and a WHILE loop.
+void printList(const list<int>& l);
+
 
 int main()
 {
@@ -261,42 +263,47 @@ int main()
 	intList1.push_back(58);
 
 	// Call function printList to print intList1.
-
+	printList(intList1);
 
 	// Using the overloaded assignment operator, copy elements of intList1 into intList2.
-
+	intList2 = intList1;
 
 	// Call function printList to print intList2.
-
+	printList(intList2);
 
 	// void sort();
 	// Using function sort, sort all elements in the second list.
-
+	intList2.sort();
 
 	// Call function printList to print intList2.
-
+	printList(intList2);
 
 	// void unique();
 	// Using function unique, remove all consecutive duplicates in the list.
-
+	intList2.unique();
 
 	// Call function printList to print intList2.
-
+	printList(intList2);
 			
 	// void push_back (const value_type& val);
 	//Insert the following elements in the third list:
 	//  13 23 25 136 198
-
+	intList3.push_back(13);
+	intList3.push_back(23);
+	intList3.push_back(25);
+	intList3.push_back(136);
+	intList3.push_back(198);
 
 	// Call function printList to print intList3.
-
+	printList(intList3);
 
 	// void merge (list& x);
 	// Add to the second list all elements of the third list.
 	// --> This is ONE statement only.
-
+	intList2.merge(intList3);
 
 	// Call function printList to print intList2.
+	printList(intList2);
 
 	/*************************************************************************
 	*		Create statements using the functions below.
@@ -348,9 +355,6 @@ int main()
 
 // Definition function printVector
 
-
-// Definition function printList
-
 void printVector(const vector<int>& v)
 {
 	if (v.empty())
@@ -358,8 +362,27 @@ void printVector(const vector<int>& v)
 		cerr << "Vector is empty." << endl;
 		return;
 	}
+
 	vector<int>::const_iterator iter = v.cbegin();
 	vector<int>::const_iterator iterEnd = v.cend();
+
+	for (iter; iter != iterEnd; ++iter)
+		cout << *iter << " ";
+	cout << endl;
+}
+
+// Definition function printList
+
+void printList(const list<int>& l)
+{
+	if (l.empty())
+	{
+		cerr << "Vector is empty." << endl;
+		return;
+	}
+
+	list<int>::const_iterator iter = l.cbegin();
+	list<int>::const_iterator iterEnd = l.cend();
 
 	for (iter; iter != iterEnd; ++iter)
 		cout << *iter << " ";

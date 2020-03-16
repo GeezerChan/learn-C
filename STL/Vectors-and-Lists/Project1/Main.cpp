@@ -184,18 +184,18 @@ int main()
 
 	// Use the overloaded assignment operator to copy all the elements of v2
 	// into v5.
-
+	v5 = v2;
 
 	// void resize (size_type n);
 	// size_type size() const noexcept;
 	// Delete the last element of v5 by using the functions resize and size
-
+	v5.resize(v5.size() - 1);
 
 	// Call the function printVector to print v5.
-
+	printVector(v5);
 
 	// Create an iterator iterVector5 to point to the first element of v5.
-
+	vector<int>::const_iterator iterVector5 = v5.cbegin();
 
 	// iterator erase (const_iterator first, const_iterator last);
 	// size_type size() const noexcept;
@@ -203,23 +203,24 @@ int main()
 	// Use function size to get the range.
 	// (Notice that the insert function returns an iterator, 
 	//   but if we do not intend to use it, we can ignore it.)
-
+	v5.erase(iterVector5 + (v5.size() / 2), v5.end());
 
 	// Call the function printVector to print v5 again.
-
+	printVector(v5);
 
 	// iterator erase (const_iterator position);
 	// Call the function erase to delete the first element of the vector.
 	// (Notice that the insert function returns an iterator, 
 	//   but if we do not intend to use it, we can ignore it.)
-
+	v5.erase(iterVector5);
 
 	// Call the function printVector to print v5 again.
-
+	printVector(v5);
 
 	// Create a vector of integers named v6 containing numbers from 100 to 105.
 	// Using the copy constructor, create a vector named v7, a copy of v6.
-
+	const vector<int> v6 = { 100, 101, 102, 103, 104, 105 };
+	vector<int> v7(v6);
 
 	// iterator erase (const_iterator position);
 	// iterator insert (const_iterator position, const value_type& val);
@@ -227,10 +228,12 @@ int main()
 	// by using an iterator.
 	// Note that the function erase returns an iterator that can be used
 	// to insert 333 in the right position.
-
+	auto posOfDeletedElem = v7.erase(v7.begin() + 3);
+	v7.insert(posOfDeletedElem, 333);
 
 	// Using a range-based FOR loop, print the elements of v7.
-
+	for (auto elem : v7)
+		cout << elem << " ";
 
 	/***************************************************************************
 			LISTS
@@ -241,12 +244,21 @@ int main()
 
 	// Use the default constructor to create three lists of integers, intList1,
 	// intList2, and intList3.
-        
+	list<int> intList1, intList2, intList3;
 
 	// void push_back (const value_type& val);
 	// Use the function push_back to insert the following values in the first list: 
 	// 23 58 58 58 36 15 15 93 98 58
-	
+	intList1.push_back(23);
+	intList1.push_back(58);
+	intList1.push_back(58);
+	intList1.push_back(58);
+	intList1.push_back(36);
+	intList1.push_back(15);
+	intList1.push_back(15);
+	intList1.push_back(93);
+	intList1.push_back(98);
+	intList1.push_back(58);
 
 	// Call function printList to print intList1.
 

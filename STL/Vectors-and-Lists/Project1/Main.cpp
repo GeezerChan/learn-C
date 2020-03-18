@@ -4,13 +4,14 @@
 	March 15, 2020
 
 	CS A250
-	Lab 10
+	Lab 9
 */
 
 #include <iostream>
 #include <string>
 #include <vector>
 #include <list>
+#include <ctime>
 
 using namespace std;
 
@@ -26,6 +27,10 @@ void printVector(const vector<int>& v);
 // Use an iterator and a WHILE loop.
 void printList(const list<int>& l);
 
+// Declaration of function fib.
+// The function receives an integer as an index 
+// and returns the fibonacci number in the series.
+int fib(int n);
 
 int main()
 {
@@ -37,7 +42,7 @@ int main()
 
 	// Use the default constructor to declare an integer vector v1.
 	vector<int> v1;
-
+	cout << "expected: 13 | output -> " << fib(6) << endl;
 
 	// void push_back (const value_type& val);
 	// Use function push_back to insert the following values in v1: 12, 73, 41,
@@ -314,37 +319,103 @@ int main()
 	cout << "\n  ***  OTHER FUNCTIONS  ***  \n\n";
 
 	// list: void assign (size_type n, const value_type& val);
+	list<int> list1 = { 6, 2, 18, 0, 5, 0, 2};
 
-	// vector: void assign (InputIterator first, InputIterator last);	
+	list1.assign(list1.size(), NULL);	// nulls all elements
+	printList(list1);
+
+	// vector: void assign (InputIterator first, InputIterator last);
+	vector<int> vector1;
+	vector1.assign(list1.begin(), list1.end());	// copies entire list into the vector
 
 	// list: const_reference back() const;
 	// (Notice that this back function returns a reference.)
+	vector1.back() = 13;	// replaces the last 0 with 13
 
 	// list: void clear() noexcept;
+	vector1.clear();
 
 	// list: bool empty() const noexcept;
+	if (vector1.empty()) 
+		cerr << "List is empty" << endl;
+
 
 	// vector: const_reference front() const;
+	vector1.push_back(666);
+	vector1.front() = 6;	// replace 666 with 6
 
 	// list: iterator insert (const_iterator position, const value_type& val);
 	// (Notice that the insert function returns an iterator.)
+	list1.insert(list1.begin(), 99); // inserts 99 in front of 6
+	printList(list1);
 
 	// list: void pop_back();
+	list1.pop_back();
 
 	// list: void pop_front();
+	list1.pop_front();
 
 	// list: void push_front (const value_type& val);
+	srand((unsigned)time(NULL));	// initializes seed
+	// adds 10 random fib numbers to the list ranging from 1 - n, 
+	// where n starts at 11
+
+	int count = 11;	
+	while (count-- > 1)
+		list1.push_front(fib(rand() % count + 1));
+
+	// expected: double digit fibs will tend to show up at the end of list
+	printList(list1);
 
 	// list: void remove (const value_type& val);
+	list1.remove(0);	// removes all zeroes
+	printList(list1);
 
 	// list: void reverse() noexcept;
+	list1.reverse();	// descending order.
+	printList(list1); 
 
 	// list: void splice (const_iterator position, list& x);
+	list<int> list3 = { fib(13), fib(12), fib(11), fib(10) };
+
+	list1.splice(list1.begin(), list3);		// connects the remaining fibonacci numbers from list3.
+	printList(list1);
 
 	// list: void splice (const_iterator position, list& x, const_iterator i);
+	// empties list3 into the middle of list1.
+	list3.resize(1, fib(14));
+
+	list<int>::iterator listIter1 = list1.begin();
+	advance(listIter1, list1.size() / 2);	
+
+	list1.splice(listIter1, list3);
+	printList(list1);
 
 	// list: void splice (const_iterator position, list& x, const_iterator first, const_iterator last);
+	// merges a new list of 0's and sorts the list into a proper fibonacci sequence
+	// in ascending order.
+	list3.resize(5, NULL);
 
+	list<int>::iterator listIter3 = list3.begin();
+	list<int>::iterator listIter3End = list3.end();
+	listIter1 = list1.end();
+
+	list1.splice(listIter1, list3, listIter3, listIter3End);	// empties list3 into the main list.
+
+	cout << "list3: ";
+	printList(list3);
+
+	list1.sort();
+	list1.unique();
+
+	cout << "expected : 0 1 2 3 5 8 13 21 34 55 89 144 233 377 610 (If you're lucky!)\n"
+		<< "Your list: ";
+	printList(list1);
+	
+	
+	// If you're lucky, final list will contain every fibonacci number in order.
+	// Keep an eye out for the rare 55!
+	// Tip: increase your chances by increasing the value of count.
 
 	cout << "\n\n----------------------------------------------------";
 
@@ -377,7 +448,7 @@ void printList(const list<int>& l)
 {
 	if (l.empty())
 	{
-		cerr << "Vector is empty." << endl;
+		cerr << "List is empty." << endl;
 		return;
 	}
 
@@ -387,4 +458,14 @@ void printList(const list<int>& l)
 	for (iter; iter != iterEnd; ++iter)
 		cout << *iter << " ";
 	cout << endl;
+}
+
+// Returns desired element in the fibonacci sequence recursively
+// fibonacci series: 1, 1, 2, 3, 5, 8, 13, 21...
+// ex. fib(6) -> 13
+int fib(int n)
+{
+	if (n <= 1)
+		return 1;
+	return fib(n - 2) + fib(n - 1);
 }

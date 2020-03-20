@@ -360,9 +360,9 @@ int main()
     
 	srand( (unsigned)time(NULL) );	// initializes seed
     
-	// adds 10 random fib numbers to the list ranging from [1,10)
+	// adds 15 random fib numbers to the list ranging from 1 - 10
 
-	int count = 20;     // Change this value to increase your chances!
+	int count = 15;     // Change this value to increase your chances!
     
 	while (count-- > 1)
 		list1.push_front( fib(rand() % 10 + 1) );

@@ -19,13 +19,15 @@ using namespace std;
 // The function passes a vector and prints all
 // the elements on one line, separated by a space.
 // Use an iterator and a FOR loop.
-void printVector(const vector<int>& v);
+template<typename T>
+void printVector(const vector<T>& v);
 
 // Declaration function printList.
 // The function passes a list and prints all
 // the elements on one line, separated by a space.
 // Use an iterator and a WHILE loop.
-void printList(const list<int>& l);
+template<typename T>
+void printList(const list<T>& l);
 
 // Declaration of function fib.
 // The function receives an integer as an index 
@@ -42,7 +44,6 @@ int main()
 
 	// Use the default constructor to declare an integer vector v1.
 	vector<int> v1;
-	cout << "expected: 13 | output -> " << fib(6) << endl;
 
 	// void push_back (const value_type& val);
 	// Use function push_back to insert the following values in v1: 12, 73, 41,
@@ -126,7 +127,7 @@ int main()
 	printVector(v4);
 
 	// Create an iterator iterVector4 to point to the first element of v4.
-	vector<int>::const_iterator iterVector4 = v4.begin();
+	vector<int>::const_iterator iterVector4 = v4.cbegin();
 
 	// Create an iterator iterVector2 to point to the second element of v2.
 	vector<int>::const_iterator iterVector2 = v2.cbegin() + 1;
@@ -356,13 +357,15 @@ int main()
 	list1.pop_front();
 
 	// list: void push_front (const value_type& val);
-	srand((unsigned)time(NULL));	// initializes seed
-	// adds 10 random fib numbers to the list ranging from 1 - n, 
-	// where n starts at 11
+    
+	srand( (unsigned)time(NULL) );	// initializes seed
+    
+	// adds 10 random fib numbers to the list ranging from [1,10)
 
-	int count = 11;	
+	int count = 20;     // Change this value to increase your chances!
+    
 	while (count-- > 1)
-		list1.push_front(fib(rand() % count + 1));
+		list1.push_front( fib(rand() % 10 + 1) );
 
 	// expected: double digit fibs will tend to show up at the end of list
 	printList(list1);
@@ -386,18 +389,19 @@ int main()
 	list3.resize(1, fib(14));
 
 	list<int>::iterator listIter1 = list1.begin();
-	advance(listIter1, list1.size() / 2);	
+	advance(listIter1, list1.size() / 2);   // preps iterator insertion point
 
-	list1.splice(listIter1, list3);
-	printList(list1);
+	list1.splice(listIter1, list3, list3.begin());
+    
+    printList(list1);
 
 	// list: void splice (const_iterator position, list& x, const_iterator first, const_iterator last);
 	// merges a new list of 0's and sorts the list into a proper fibonacci sequence
 	// in ascending order.
 	list3.resize(5, NULL);
 
-	list<int>::iterator listIter3 = list3.begin();
-	list<int>::iterator listIter3End = list3.end();
+	list<int>::const_iterator listIter3 = list3.cbegin();
+	list<int>::const_iterator listIter3End = list3.cend();
 	listIter1 = list1.end();
 
 	list1.splice(listIter1, list3, listIter3, listIter3End);	// empties list3 into the main list.
@@ -407,14 +411,12 @@ int main()
 
 	list1.sort();
 	list1.unique();
-
+        
 	cout << "expected : 0 1 2 3 5 8 13 21 34 55 89 144 233 377 610 (If you're lucky!)\n"
 		<< "Your list: ";
 	printList(list1);
 	
-	
 	// If you're lucky, final list will contain every fibonacci number in order.
-	// Keep an eye out for the rare 55!
 	// Tip: increase your chances by increasing the value of count.
 
 	cout << "\n\n----------------------------------------------------";
@@ -426,7 +428,8 @@ int main()
 
 // Definition function printVector
 
-void printVector(const vector<int>& v)
+template<typename T>
+void printVector(const vector<T>& v)
 {
 	if (v.empty())
 	{
@@ -434,17 +437,19 @@ void printVector(const vector<int>& v)
 		return;
 	}
 
-	vector<int>::const_iterator iter = v.cbegin();
-	vector<int>::const_iterator iterEnd = v.cend();
+	auto iter= v.cbegin();
+	auto iterEnd = v.cend();
 
 	for (iter; iter != iterEnd; ++iter)
 		cout << *iter << " ";
 	cout << endl;
 }
 
+
 // Definition function printList
 
-void printList(const list<int>& l)
+template<typename T>
+void printList(const list<T>& l)
 {
 	if (l.empty())
 	{
@@ -452,15 +457,15 @@ void printList(const list<int>& l)
 		return;
 	}
 
-	list<int>::const_iterator iter = l.cbegin();
-	list<int>::const_iterator iterEnd = l.cend();
+	auto iter = l.cbegin();
+	auto iterEnd = l.cend();
 
-	for (iter; iter != iterEnd; ++iter)
-		cout << *iter << " ";
+	while (iter != iterEnd)
+		cout << *(iter++) << " ";
 	cout << endl;
 }
 
-// Returns desired element in the fibonacci sequence recursively
+// Returns the upper-bound of the desired fibonacci number in the series.
 // fibonacci series: 1, 1, 2, 3, 5, 8, 13, 21...
 // ex. fib(6) -> 13
 int fib(int n)

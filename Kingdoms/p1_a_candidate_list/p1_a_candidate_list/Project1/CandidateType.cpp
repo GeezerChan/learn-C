@@ -24,12 +24,7 @@ CandidateType::CandidateType()
 {
 	totalVotes = 0;
 	numOfKingdoms = NUM_OF_KINGDOMS;
-	kingdomVotes = new int[numOfKingdoms];
-
-	for (int i = 0; i < numOfKingdoms; ++i)
-	{
-		kingdomVotes[i] = 0;
-	}
+	kingdomVotes = new int[numOfKingdoms]();
 }
 
 // Copy constructor

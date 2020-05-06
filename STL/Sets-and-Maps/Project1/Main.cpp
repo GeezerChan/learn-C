@@ -1,3 +1,12 @@
+/*
+	Blood, William
+
+	April 7, 2020
+
+	CS A250
+	Lab 10
+*/
+
 #include <iostream>
 #include <string>
 #include <set>
@@ -26,6 +35,7 @@ int main()
 	set<int> set1 = { 2, 7, 5, 6, 9, 1, 3 };
 
 	// Print the set using the printSet function you implemented.
+	cout << "\n1 2 3 5 6 7 9 --> ";
 	printSet(set1);
 
 	// What do you notice in the printout?
@@ -35,13 +45,15 @@ int main()
 	// Use the function erase to erase the integer 2 from set1, but this
 	// time use cout to print the return value.  What is the return
 	// value?
-	cout << set1.erase(2) << endl;	// returns a boolean if successful
+	cout << "\nremoving 2.. --> ";
+	cout << set1.erase(2) << endl;	// returns true (1) if successful
 
 	// If you do not know what the return value is, then
 	// check set::erase in cplusplus.com
 	cout << endl;
 
 	// Print set1.
+	cout << "\n1 3 5 6 7 9 |" << endl;
 	printSet(set1);
 
 	// iterator erase (const_iterator position);
@@ -53,7 +65,7 @@ int main()
 	set1.erase(++set1.begin());
 
 	// Print set1.
-
+	cout << "\n1 5 6 7 9 |" << endl;
 	printSet(set1);
 
 	// pair<iterator,bool> insert (const value_type& val);
@@ -62,6 +74,7 @@ int main()
 	set1.insert(8);
 
 	// Print set1.
+	cout << "\n1 4 5 6 7 8 9 |" << endl;
 	printSet(set1);
 	
 	set<int>::iterator first = set1.begin();
@@ -70,11 +83,11 @@ int main()
 	// Use function erase to delete the first and second element
 	// in set1. Use the given iterators created above.
 	// Note that you should write one statement only.
-
+	set1.erase(first, ++second);
 
 	// Print set1.
-
-
+	cout << "\n5 6 7 8 9 |" << endl;
+	printSet(set1);
 	// Your output should be: 5 6 7 8
 	// If it is not, you need to carefully view the function erase
 	// to understand how it works.

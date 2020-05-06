@@ -37,7 +37,7 @@ int Vector2D::operator*(const Vector2D& rhs) {
 }
 
 bool Vector2D::operator==(const Vector2D& rhs) {
-	return (x == y && rhs.x == rhs.y);
+	return (this->x == this->y && rhs.x == rhs.y);
 }
 
 Vector2D::~Vector2D(){}

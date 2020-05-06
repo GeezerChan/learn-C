@@ -2,6 +2,16 @@
 
 using namespace std;
 
+void DoublyList::mystery()
+{
+	first->setNext(first->getNext()->getNext());
+	first->getNext()->getPrev()->setNext(first);
+	first = first->getNext()->getPrev();
+	first->setPrev(nullptr);
+	first->getNext()->getNext()->setPrev(first->getNext());
+	first->getNext()->setPrev(first); // STATEMENT
+}
+
 	//default constructor
 DoublyList::DoublyList() : first(nullptr), 
 								last(nullptr),count(0) {}

@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{B3AC5FA5-3E0A-4603-927D-E7BD84614789}</ProjectGuid>
+    <ProjectGuid>{2128B700-265A-4B44-AF0C-FD89D21F843B}</ProjectGuid>
     <RootNamespace>Project1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -123,10 +123,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CandidateType.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="CharacterType.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MyClass.h" />
+    <ClInclude Include="CandidateType.h" />
+    <ClInclude Include="CharacterType.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="candidates_data.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

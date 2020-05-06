@@ -31,6 +31,13 @@ public:
 	void deleteBeforeLast();
 
 	void emptyTheList();
+	void mystery();		// FINAL QUESTION
+	void mystery2();
+	void swapFirstAndSecond();
+
+	void printForward();
+
+
 	~AnyList();
 
 private:

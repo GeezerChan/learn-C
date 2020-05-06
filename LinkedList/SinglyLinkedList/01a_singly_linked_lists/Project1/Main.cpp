@@ -10,6 +10,9 @@ void processList(AnyList myList, int elem);
 
 int main()
 {
+
+
+
 	AnyList myList;
 	
 	// How to test a NodeList

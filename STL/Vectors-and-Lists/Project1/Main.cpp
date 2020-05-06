@@ -7,11 +7,15 @@
 	Lab 9
 */
 
+#include "MyClass.h"
+
 #include <iostream>
 #include <string>
 #include <vector>
 #include <list>
 #include <ctime>
+#include <queue>
+#include <stack>
 
 using namespace std;
 
@@ -34,8 +38,135 @@ void printList(const list<T>& l);
 // and returns the fibonacci number in the series.
 int fib(int n);
 
+void showq(queue <int>& gq)
+{
+	queue<int> g = gq;
+	while (!g.empty())
+	{
+		cout << '\t' << g.front();
+		g.pop();
+	}
+	cout << '\n';
+}
+
+
 int main()
 {
+	
+
+	{
+		MyClass<int> MyObj;
+	}
+
+	{
+		cout << endl;
+
+		queue<int> q;
+		q.push(1);
+		q.push(3);
+		q.push(8);
+
+		queue<int> q2;
+		q.push(2);
+		q.push(4);
+		q.push(6);
+
+		queue<int> q3;
+
+		while (!q.empty() && !q2.empty())
+		{
+			if (q.front() < q2.front())
+			{
+				q3.push(q.front());
+				q.pop();
+			}
+			else
+			{
+				q3.push(q2.front());
+				q2.pop();
+
+			}
+		}
+
+		cout << "\nQ1: \n";
+
+		while (!q.empty())
+		{
+			cout << q.front() << " ";
+			q.pop();
+		}
+
+		cout << "\nQ2: \n";
+
+		while (!q2.empty())
+		{
+			cout << q2.front() << " ";
+			q2.pop();
+		}
+
+		cout << endl;
+
+		cout << "\nQ3: \n";
+
+		while (!q3.empty())
+		{
+			cout << q3.front() << " ";
+			q3.pop();
+		}
+
+		cout << endl;
+
+
+		// front
+		// push (front val)
+		// pop
+
+		cout << endl;
+	}
+
+
+	{
+		cout << endl;
+
+		vector<int> v = { 10, 20 };
+		v.reserve(10);
+		for (int i = 0; i < 200; ++i)
+			v.push_back(5);
+		
+		v.resize(7);
+
+		v[v.size() - 3] = 1;
+		v[v.size() - 2] = 2;
+		v[v.size() - 1] = 3;
+
+		v.resize(9, 6);
+
+		for (auto e : v)
+			cout << e << " ";
+		cout << endl;
+
+	}
+
+	{
+		queue <int> gquiz;
+		gquiz.push(10);
+		gquiz.push(20);
+		gquiz.push(30);
+
+		cout << "The queue gquiz is : ";
+		showq(gquiz);
+
+		cout << "\ngquiz.size() : " << gquiz.size();
+		cout << "\ngquiz.front() : " << gquiz.front();
+		cout << "\ngquiz.back() : " << gquiz.back();
+
+		cout << "\ngquiz.pop() : ";
+		gquiz.pop();
+		showq(gquiz);
+
+		return 0;
+	}
+
 
 	/***************************************************************************
 			VECTORS

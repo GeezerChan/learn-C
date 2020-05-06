@@ -4,40 +4,21 @@
 #include <string>
 using namespace std;
 
+Vector2D func()
+{
+	Vector2D v1(6, 6);
+	return v1;
+}
+
 int main()
 {
-	int x = 0,
-		y = 0;
-	char retry = 'y';
+	Vector2D x;
 
-	cout << " *** Two-dimensional Vectors ***\n";
+	Vector2D y(x);
+	//Vector2D y = x;
+	//y = x;
+	//x = func();
 
-	do
-	{
-		cout << "\nVector 1\n    Enter x and y: ";
-		cin >> x >> y;
-		Vector2D v1(x, y);
-
-		cout << "Vector 2\n    Enter x and y: ";
-		cin >> x >> y;
-		Vector2D v2(x, y);
-
-		cout << "\nVectors are:\n";
-		cout << "    " << v1 << endl;
-		cout << "    " << v2 << endl;
-
-		if (v1 == v2)
-			cout << "\nVectors are equivalent." << endl;
-		else
-			cout << "\nVectors are not equivalent." << endl;
-
-		cout << "\nDot product = " << (v1 * v2) << endl;
-
-		cout << "\n----------------------------------------------------\n";
-		cout << "\nWould you like to try again? (y/n) ";
-		cin >> retry;
-		
-	} while (retry == 'y');
 
 	cout << endl;
 	system("Pause");

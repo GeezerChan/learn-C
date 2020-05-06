@@ -34,6 +34,8 @@ public:
     
 	void printForward() const;
 	void printReverse() const;
+
+	void mystery();	// FINAL QUESTION
 	
 	void emptyTheList();
 	~DoublyList();

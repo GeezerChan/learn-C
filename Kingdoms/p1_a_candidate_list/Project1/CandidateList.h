@@ -1,15 +1,15 @@
 /*
-    KaibaCorp
-    Bearden, Reese (TTh 6:30)
-    Blood, William (TTh 6:30)
-    Diep, Vince (TTh 2:20)
-    Huynh, Andy (TTh 6:30)
-    Nguyen, Andrew (MW 11:10)
+	KaibaCorp
+	Bearden, Reese (TTh 6:30)
+	Blood, William (TTh 6:30)
+	Diep, Vincent (TTh 2:20)
+	Huynh, Andy (TTh 6:30)
+	Nguyen, Andrew (MW 11:10)
 
-    May 05, 2020
+	May 05, 2020
 
-    CS A250
-    Project 1 - Part B
+	CS A250
+	Project 1 - Part D
 */
 
 #ifndef CANDIDATELIST_H
@@ -25,27 +25,29 @@ class Node
 {
 public:
 	Node() : link(nullptr) {}
-    Node(const CandidateType& newCandidate, Node *theLink) 
-		: candidate(newCandidate), link(theLink){}
-    Node* getLink( ) const { return link; }
-	CandidateType getCandidate( ) const { return candidate; }
-    void setCandidate(const CandidateType& newCandidate)
-		{ candidate = newCandidate; }
-    void setLink(Node *theLink) { link = theLink; }
+	Node(const CandidateType& newCandidate, Node* theLink)
+		: candidate(newCandidate), link(theLink) {}
+	Node* getLink() const { return link; }
+	CandidateType getCandidate() const { return candidate; }
+	void setCandidate(const CandidateType& newCandidate)
+	{
+		candidate = newCandidate;
+	}
+	void setLink(Node* theLink) { link = theLink; }
 	~Node() {}
 private:
-    CandidateType candidate;
-    Node *link;		//pointer that points to next node
+	CandidateType candidate;
+	Node* link;		//pointer that points to next node
 };
 
 class CandidateList
 {
 public:
 	// Default constructor
-	CandidateList();
+	CandidateList() : count{ 0 }, first(nullptr), last(nullptr) {};
 
 	// addCandidate
-	void addCandidate(const CandidateType&);
+	void addCandidate(const CandidateType& candidate);
 
 	// getWinner
 	int getWinner() const;
@@ -53,32 +55,30 @@ public:
 	// isEmpty
 	bool isEmpty() const;
 	// searchCandidate
-	bool searchCandidate(int) const;
+	bool searchCandidate(int id) const;
 
 	// printCandidateName
-	void printCandidateName(int) const;
+	void printCandidateName(int id) const;
 	// printAllCandidates
 	void printAllCandidates() const;
 	// printKingdomVotes
-	void printKingdomVotes(int, int) const;
+	void printKingdomVotes(int id, int index) const;
 	// printCandidateTotalVotes
-	void printCandidateTotalVotes(int) const;
+	void printCandidateTotalVotes(int id) const;
+
 	// printFinalResults
 	void printFinalResults() const;
-	
-
 	// clearList
 	void clearList();
 	// Destructor
 	~CandidateList();
 
-
 private:
 	// searchCandidate
-	bool searchCandidate(int, Node*& ptr) const;
-	
-	Node *first; 	// pointer to the first candidate in the list
-	Node *last;		// pointer to last candidate in the list
+	bool searchCandidate(int id, Node*& ptr) const;
+
+	Node* first; 	// pointer to the first candidate in the list
+	Node* last;		// pointer to last candidate in the list
 	int count;		// number of candidates in the list	
 };
 

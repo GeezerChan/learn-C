@@ -6,10 +6,10 @@
 	Huynh, Andy (TTh 6:30)
 	Nguyen, Andrew (MW 11:10)
 
-	April 28, 2020
+	May 05, 2020
 
 	CS A250
-	Project 1 - Part A
+	Project 1 - Part D
 */
 
 #ifndef CANDIDATETYPE_H
@@ -25,10 +25,10 @@ const std::string KINGDOMS[] = {
 	"The Reach",
 	"The Westerlands",
 	"The Iron Islands",
-	"Dorne" 
+	"Dorne"
 };
 
-class CandidateType	: public CharacterType
+class CandidateType : public CharacterType
 {
 public:
 	// Default constructor
@@ -47,7 +47,6 @@ public:
 	// getVotesByKingdom
 	int getVotesByKingdom(int index) const;
 
-
 	// printCandidateInfo
 	void printCandidateInfo() const;
 	// printCandidateTotalVotes
@@ -56,11 +55,10 @@ public:
 	// Destructor
 	~CandidateType();
 
-	
 private:
 	int totalVotes;
 	int numOfKingdoms;
-	int *kingdomVotes;
+	int* kingdomVotes;
 };
 
 #endif

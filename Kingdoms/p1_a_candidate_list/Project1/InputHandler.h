@@ -1,5 +1,15 @@
 /*
-	(name header)
+	KaibaCorp
+	Bearden, Reese (TTh 6:30)
+	Blood, William (TTh 6:30)
+	Diep, Vincent (TTh 2:20)
+	Huynh, Andy (TTh 6:30)
+	Nguyen, Andrew (MW 11:10)
+
+	May 05, 2020
+
+	CS A250
+	Project 1 - Part D
 */
 
 #include "CandidateList.h"

@@ -5,11 +5,11 @@
 	Diep, Vincent (TTh 2:20)
 	Huynh, Andy (TTh 6:30)
 	Nguyen, Andrew (MW 11:10)
-	
-	April 28, 2020
+
+	May 05, 2020
 
 	CS A250
-	Project 1 - Part A
+	Project 1 - Part D
 */
 
 #include "CandidateType.h"
@@ -24,7 +24,7 @@ CandidateType::CandidateType()
 {
 	totalVotes = 0;
 	numOfKingdoms = NUM_OF_KINGDOMS;
-	kingdomVotes = new int[numOfKingdoms]();
+	kingdomVotes = new int[numOfKingdoms] {0};
 }
 
 // Copy constructor
@@ -45,29 +45,28 @@ CandidateType::CandidateType(const CandidateType& other)
 // Copy assignment operator
 CandidateType& CandidateType::operator=(const CandidateType& other)
 {
-	if (&other != this)
+	if (&other == this)
 	{
-		setCharacterInfo(other.getFirstName(), 
+		cerr << "Attempted self-assignment.";
+	}
+	else
+	{
+		setCharacterInfo(other.getFirstName(),
 			other.getLastName(), other.getID());
 
 		if (numOfKingdoms != other.numOfKingdoms)
 		{
-			numOfKingdoms = other.numOfKingdoms;
-
 			delete[] kingdomVotes;
-			kingdomVotes = new int[numOfKingdoms];
+			kingdomVotes = new int[other.numOfKingdoms];
 		}
 
+		numOfKingdoms = other.numOfKingdoms;
 		totalVotes = other.totalVotes;
 
 		for (int i = 0; i < numOfKingdoms; ++i)
 		{
 			kingdomVotes[i] = other.kingdomVotes[i];
 		}
-	}
-	else
-	{
-		cerr << "Attempted self-assignment.";
 	}
 
 	return *this;
@@ -104,8 +103,7 @@ void CandidateType::printCandidateInfo() const
 void CandidateType::printCandidateTotalVotes() const
 {
 	printName();
-	cout << endl;
-	cout << "=> Total Votes (all kingdoms): " << totalVotes;
+	cout << endl << "=> Total Votes (all kingdoms): " << totalVotes;
 }
 
 // Destructor
@@ -113,5 +111,4 @@ CandidateType::~CandidateType()
 {
 	delete[] kingdomVotes;
 	kingdomVotes = nullptr;
-	totalVotes = 0;
 }

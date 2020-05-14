@@ -2,12 +2,14 @@
 	KaibaCorp
 	Bearden, Reese (TTh 6:30)
 	Blood, William (TTh 6:30)
-	Diep, Vince (TTh 2:20)
+	Diep, Vincent (TTh 2:20)
 	Huynh, Andy (TTh 6:30)
 	Nguyen, Andrew (MW 11:10)
+
 	May 05, 2020
+
 	CS A250
-	Project 1 - Part B
+	Project 1 - Part D
 */
 
 #include "CandidateList.h"
@@ -16,14 +18,6 @@ using namespace std;
 
 // Function declarations
 // Same order as in class definition
-
-// Default constructor
-CandidateList::CandidateList()
-{
-	first = nullptr;
-	last = nullptr;
-	count = 0;
-}
 
 // addCandidate
 void CandidateList::addCandidate(const CandidateType& candidate)
@@ -41,7 +35,6 @@ void CandidateList::addCandidate(const CandidateType& candidate)
 		last = last->getLink();
 	}
 
-	temp = nullptr;
 	++count;
 }
 
@@ -56,14 +49,17 @@ int CandidateList::getWinner() const
 	else
 	{
 		Node* temp = first;
-		int top = 0;
-		int idStore = 0;
+		int idStore{ 0 }, 
+			top{ 0 };
+
 		while (temp != nullptr)
 		{
-			const int voteCount = temp->getCandidate().getTotalVotes();
-			if (voteCount > top)
+			const int VOTE_COUNT = 
+				temp->getCandidate().getTotalVotes();
+
+			if (VOTE_COUNT > top)
 			{
-				top = voteCount;
+				top = VOTE_COUNT;
 				idStore = temp->getCandidate().getID();
 			}
 			temp = temp->getLink();
@@ -79,28 +75,11 @@ bool CandidateList::isEmpty() const
 	return (count == 0);
 }
 
-// searchCandidate
+// searchCandidate(public)
 bool CandidateList::searchCandidate(int id) const
 {
 	Node* temp = nullptr;
 	return searchCandidate(id, temp);
-}
-
-bool CandidateList::searchCandidate(int id, Node*& ptr) const
-{
-	Node* temp = first;
-	while (temp != nullptr)
-	{
-		if (temp->getCandidate().getID() == id)
-		{
-			ptr = temp;
-			return true;
-		}
-		temp = temp->getLink();
-	}
-	cerr << "    => ID not in the list." << endl;
-
-	return false;
 }
 
 // printCandidateName
@@ -116,12 +95,19 @@ void CandidateList::printCandidateName(int id) const
 // printAllCandidates
 void CandidateList::printAllCandidates() const
 {
-	Node* temp = first;
-	while (temp != nullptr)
+	if (count == 0)
 	{
-		temp->getCandidate().printCandidateInfo();
-		cout << endl;
-		temp = temp->getLink();
+		cerr << "    => List is empty.";
+	}
+	else
+	{
+		Node* temp = first;
+		while (temp != nullptr)
+		{
+			temp->getCandidate().printCandidateInfo();
+			cout << endl;
+			temp = temp->getLink();
+		}
 	}
 }
 
@@ -142,7 +128,7 @@ void CandidateList::printCandidateTotalVotes(int id) const
 {
 	Node* temp = nullptr;
 	if (searchCandidate(id, temp))
-	{
+	{			
 		cout << "    => Total votes: "
 			<< temp->getCandidate().getTotalVotes() << endl;
 	}
@@ -151,60 +137,79 @@ void CandidateList::printCandidateTotalVotes(int id) const
 // printFinalResults
 void CandidateList::printFinalResults() const
 {
-	cout << "************ FINAL RESULTS ************" << endl << endl;
-
-	cout << left << setw(15) << "LAST" << left << setw(10) << "FIRST"
-		<< right << setw(5) << "TOTAL" << right << setw(7) << "POS" << endl;
-
-	cout << left << setw(15) << "NAME" << left << setw(10) << "NAME"
-		<< right << setw(5) << "VOTES" << right << setw(7) << "#" << endl;
-
-	cout << "_______________________________________" << endl << endl;
-
-	Node* winner = first;
-	int prevHighestVoteCount(0);
-	while (winner != nullptr)
+	if (first == nullptr)
 	{
-		const int prevVoteCount = winner->getCandidate().getTotalVotes();
-		if (prevVoteCount > prevHighestVoteCount)
-		{
-			prevHighestVoteCount = prevVoteCount;
-		}
-		winner = winner->getLink();
+		cerr << "    => List is empty.";
 	}
-
-	++prevHighestVoteCount;
-
-	for (int pos = 1; pos <= count; ++pos)
+	else
 	{
-		Node* temp = first;
-		int highestVoteCount = 0;
+		cout << string(12, '*') << " FINAL RESULTS "
+			<< string(12, '*') << "\n\n";
 
-		while (temp != nullptr)
+		cout << left << setw(15) << "LAST" 
+			<< left << setw(10) << "FIRST" 
+			<< right << setw(5) << "TOTAL"
+			<< right << setw(7) << "POS" << endl;
+
+		cout << left << setw(15) << "NAME"
+			<< left << setw(10) << "NAME"
+			<< right << setw(5) << "VOTES"
+			<< right << setw(7) << "#" << endl;
+
+		cout << string(40, '_') << "\n\n";
+
+		Node* winner = first;
+		int prevHighestVoteCount{ 0 };
+
+		while (winner != nullptr)
 		{
-			const int tempVotes = temp->getCandidate().getTotalVotes();
-			if (tempVotes > highestVoteCount &&
-				tempVotes < prevHighestVoteCount)
+			const int PREV_VOTE_COUNT =
+				winner->getCandidate().getTotalVotes();
+		
+			if (PREV_VOTE_COUNT > prevHighestVoteCount)
 			{
-				highestVoteCount = tempVotes;
-				winner = temp;
+				prevHighestVoteCount = PREV_VOTE_COUNT;
 			}
-			temp = temp->getLink();
+			winner = winner->getLink();
 		}
-		prevHighestVoteCount = highestVoteCount;
-
-		cout << left << setw(15) << winner->getCandidate().getLastName()
-			<< left << setw(10) << winner->getCandidate().getFirstName()
-			<< right << setw(5) << highestVoteCount
-			<< right << setw(7) << pos << endl;
-
-		if (pos % 5 == 0)
+		
+		++prevHighestVoteCount;
+		
+		for (int pos = 1; pos <= count; ++pos)
 		{
-			cout << "---------------------------------------" << "\n";
+			Node* temp = first;
+			int highestVoteCount = { 0 };
+		
+			while (temp != nullptr)
+			{
+				const int TEMP_VOTES =
+					temp->getCandidate().getTotalVotes();
+		
+				if (TEMP_VOTES > highestVoteCount - 1 &&
+					TEMP_VOTES < prevHighestVoteCount)
+				{
+					highestVoteCount = TEMP_VOTES;
+					winner = temp;
+				}
+				temp = temp->getLink();
+			}
+			prevHighestVoteCount = highestVoteCount;
+			
+			
+			cout << left << setw(15) 
+				<< winner->getCandidate().getLastName()
+				<< left << setw(10) 
+				<< winner->getCandidate().getFirstName()
+				<< right << setw(5) << highestVoteCount
+				<< right << setw(7) << pos << endl;
+				
+			if (pos % 5 == 0)
+			{
+				cout << string(40, '-') << "\n";
+			}
 		}
+		cout << string(40, '_') << endl;
 	}
-
-	cout << "_______________________________________" << endl;
 }
 
 // clearList
@@ -219,10 +224,38 @@ void CandidateList::clearList()
 	}
 
 	count = 0;
+	first = nullptr;
+	last = nullptr;
 }
 
 // Destructor
 CandidateList::~CandidateList()
 {
 	clearList();
+}
+
+//searchCandidate(private)
+bool CandidateList::searchCandidate(int id, Node*& ptr) const
+{
+	if (count == 0)
+	{
+		cerr << "    => List is empty." << endl;
+	}
+	else
+	{
+		ptr = first;
+		while (ptr != nullptr)
+		{
+			if (ptr->getCandidate().getID() == id)
+			{
+				return true;
+			}
+			ptr = ptr->getLink();
+		}
+		if (ptr == nullptr)
+		{
+			cerr << "    => ID not in the list.";
+		}
+	}
+	return false;
 }

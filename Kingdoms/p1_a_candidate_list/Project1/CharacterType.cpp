@@ -6,10 +6,10 @@
     Huynh, Andy (TTh 6:30)
     Nguyen, Andrew (MW 11:10)
 
-    April 28, 2020
+    May 05, 2020
 
     CS A250
-    Project 1 - Part A
+    Project 1 - Part D
 */
 
 #include "CharacterType.h"
@@ -18,12 +18,6 @@ using namespace std;
 
 // Implement all functions in the SAME order
 // as listed in the interface file.
-
-// Default constructor
-CharacterType::CharacterType()
-{
-    id = 0;
-}
 
 // Overloaded constructor
 CharacterType::CharacterType(const string& newFirst,

@@ -159,7 +159,7 @@ void CandidateList::printFinalResults() const
 		cout << string(40, '_') << "\n\n";
 
 		Node* winner = first;
-		int prevHighestVoteCount{ 0 };
+		int prevHighestVoteCount = 0;
 
 		while (winner != nullptr)
 		{
@@ -178,7 +178,7 @@ void CandidateList::printFinalResults() const
 		for (int pos = 1; pos <= count; ++pos)
 		{
 			Node* temp = first;
-			int highestVoteCount = { 0 };
+			int highestVoteCount = 0;
 		
 			while (temp != nullptr)
 			{

@@ -216,7 +216,7 @@ void CandidateList::printFinalResults() const
 void CandidateList::clearList()
 {
 	Node* temp = first;
-	while (temp != last)
+	while (temp != nullptr)
 	{
 		temp = temp->getLink();
 		delete first;

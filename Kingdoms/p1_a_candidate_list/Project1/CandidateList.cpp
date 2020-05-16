@@ -254,7 +254,7 @@ bool CandidateList::searchCandidate(int id, Node*& ptr) const
 		}
 		if (ptr == nullptr)
 		{
-			cerr << "    => ID not in the list.";
+			cerr << "    => ID not in the list." << endl;
 		}
 	}
 	return false;
